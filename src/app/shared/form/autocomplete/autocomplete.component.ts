@@ -37,7 +37,7 @@ import { AddressService } from 'src/app/services/address.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
-  @ViewChild('autocomplete', { static: true }) autocomplete: ElementRef<any>;
+  @ViewChild('autocomplete', {static: true}) autocomplete: ElementRef<any>;
 
   items: Array<string> = [];
   search = new FormControl();
@@ -49,16 +49,19 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
   constructor(
     private service: AddressService,
     private ref: ChangeDetectorRef
-  ) {}
+  ) {
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.search.valueChanges
       .pipe(
         debounceTime(250),
         distinctUntilChanged(),
         // reset value to null if empty
         tap((v) => {
-          if (v.trim() === '') this.writeValue(null);
+          if (v.trim() === '') {
+            this.writeValue(null);
+          }
         }),
 
         // filter out empty strings to avoid search nothing
@@ -77,11 +80,12 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
       });
   }
 
-  private onTouch = () => {};
+  private onTouch = () => {
+  }
 
   // hide the dropdown when clicks anywhere else
   @HostListener('document:click', ['$event.target'])
-  public onClick(targetElement) {
+  public onClick(targetElement): void {
     const clickedInside = this.autocomplete.nativeElement.contains(
       targetElement
     );
@@ -92,14 +96,14 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
   }
 
   @HostListener('blur')
-  public onTouched() {
+  public onTouched(): void {
     this.closeDropdown();
     this.onTouch();
   }
 
   writeValue(val: string): void {
     this.result.next(val);
-    this.search.setValue(val, { emitEvent: false });
+    this.search.setValue(val, {emitEvent: false});
     this.onTouch();
     this.closeDropdown();
   }
@@ -116,19 +120,19 @@ export class AutocompleteFormComponent implements OnInit, ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  onItemClick(item: string) {
+  onItemClick(item: string): void {
     if (!this.disabled) {
       this.writeValue(item);
     }
   }
 
-  toggleDropdown() {
+  toggleDropdown(): void {
     if (!this.disabled) {
       this.open = !this.open;
     }
   }
 
-  closeDropdown() {
+  closeDropdown(): void {
     this.open = false;
   }
 }

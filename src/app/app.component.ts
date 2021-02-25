@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe((event) =>
         this.titleService.setTitle(
-          `${event['title']} - Attestation sur l'honneur de covoiturage`
+          `${event['title']} - Attestation sur l'honneur de déplacement en vélo`
         )
       );
   }

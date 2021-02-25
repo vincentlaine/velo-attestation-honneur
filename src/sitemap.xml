@@ -6,23 +6,23 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 <url>
-  <loc>https://attestation.covoiturage.beta.gouv.fr/</loc>
-  <lastmod>2020-10-21T14:22:03+00:00</lastmod>
+  <loc>https://attestation-velo.fr/</loc>
+  <lastmod>2021-02-25T12:22:03+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://attestation.covoiturage.beta.gouv.fr/salarie-secteur-prive</loc>
-  <lastmod>2020-10-21T14:22:03+00:00</lastmod>
+  <loc>https://attestation-velo.fr/salarie-secteur-prive</loc>
+  <lastmod>2021-02-25T12:22:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://attestation.covoiturage.beta.gouv.fr/salarie-secteur-prive</loc>
-  <lastmod>2020-10-21T14:22:03+00:00</lastmod>
+  <loc>https://attestation-velo.fr/salarie-secteur-prive</loc>
+  <lastmod>2021-02-25T12:22:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://attestation.covoiturage.beta.gouv.fr/je-suis-employeur</loc>
-  <lastmod>2020-10-21T14:22:03+00:00</lastmod>
+  <loc>https://attestation-velo.fr/je-suis-employeur</loc>
+  <lastmod>2021-02-25T12:22:03+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 

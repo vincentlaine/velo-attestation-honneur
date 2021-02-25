@@ -15,10 +15,13 @@ interface Feature {
 export class AddressService {
   endpoint: string = 'https://api-adresse.data.gouv.fr/search/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   search(term: string): Observable<string[]> {
-    if (!term.trim()) return of([]);
+    if (!term.trim()) {
+      return of([]);
+    }
 
     const name = encodeURIComponent(term.trim());
 
@@ -27,7 +30,7 @@ export class AddressService {
       .pipe(
         map((res) => res.features.map((f) => f.properties.label)),
         catchError((err) => {
-          console.log(err);
+          console.error(err);
           return of([]);
         })
       );

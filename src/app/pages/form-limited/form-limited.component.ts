@@ -27,7 +27,7 @@ export class FormLimitedComponent implements OnInit {
       Validators.maxLength(128),
     ]),
     distance: new FormControl(null, [
-      Validators.max(100000),
+      Validators.max(1000),
       Validators.pattern(/^[0-9]{0,6}$/),
     ]),
     days: new FormControl(null, [
@@ -66,7 +66,7 @@ export class FormLimitedComponent implements OnInit {
       });
   }
 
-  showError(fieldName: string, errorName: string) {
+  showError(fieldName: string, errorName: string): any {
     return (
       this.profileForm.get(fieldName).dirty &&
       this.profileForm.get(fieldName).hasError(errorName)
@@ -82,10 +82,10 @@ export class FormLimitedComponent implements OnInit {
     localStorage.removeItem('formLtd');
   }
 
-  async onSubmit() {
+  async onSubmit(): Promise<any> {
     this.pdf.generate(this.profileForm.value, {
       onComplete: () => alert('Attestation générée'),
     });
-    this.counter.save(window.origin, 'limited');
+    // this.counter.save(window.origin, 'limited');
   }
 }

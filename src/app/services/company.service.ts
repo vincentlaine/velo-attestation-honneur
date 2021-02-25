@@ -9,10 +9,13 @@ import { map, catchError } from 'rxjs/operators';
 export class CompanyService {
   endpoint: string = 'https://entreprise.data.gouv.fr/api/sirene/v1/suggest/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   search(term: string): Observable<string[]> {
-    if (!term.trim()) return of([]);
+    if (!term.trim()) {
+      return of([]);
+    }
 
     const name = encodeURIComponent(term.trim());
 
@@ -26,7 +29,7 @@ export class CompanyService {
           )
         ),
         catchError((err) => {
-          console.log(err);
+          console.error(err);
           return of([]);
         })
       );

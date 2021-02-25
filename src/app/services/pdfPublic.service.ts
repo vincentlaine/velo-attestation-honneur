@@ -11,28 +11,31 @@ import { certFilename } from '../shared/helpers/certFilename.helper';
   providedIn: 'root',
 })
 export class PdfPublicGeneratorService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  generate(
-    data: ProfilePublicFormInterface,
-    obs?: { onComplete?: Function; onError?: Function }
-  ) {
+  generate(data: ProfilePublicFormInterface,
+           obs?: { onComplete?: any; onError?: any }): void {
     const observer = {
       next: (pdfBytes) => {
         saveAs(
-          new Blob([pdfBytes], { type: 'application/pdf' }),
+          new Blob([pdfBytes], {type: 'application/pdf'}),
           certFilename(data.name)
         );
       },
     };
 
-    if (obs.onError) observer['error'] = obs.onError;
-    if (obs.onComplete) observer['complete'] = obs.onComplete;
+    if (obs.onError) {
+      observer['error'] = obs.onError;
+    }
+    if (obs.onComplete) {
+      observer['complete'] = obs.onComplete;
+    }
 
     this.http
-      .get('/assets/certificate_public.pdf', { responseType: 'arraybuffer' })
+      .get('/assets/certificate_public.pdf', {responseType: 'arraybuffer'})
       .pipe(
-        catchError(this.handleError),
+        catchError(this._handleError),
 
         // convert the PDF load document to an observable
         switchMap((pdfBuffer: ArrayBuffer) =>
@@ -55,15 +58,15 @@ export class PdfPublicGeneratorService {
           })(page, font);
 
           draw(data.name, 420, 494);
-          draw(data.days.toString(), 457, 298);
-          draw(data.year.toString(), 568, 298);
-          draw(data.location, 380, 193);
+          draw(data.days.toString(), 405, 290);
+          draw(data.year.toString(), 517, 290);
+          draw(data.location, 385, 163);
 
           const now = new Date();
           draw(
-            `${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`,
-            380,
-            180
+            `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`,
+            385,
+            150
           );
 
           draw(data.name, 79, 482, 10);
@@ -100,14 +103,16 @@ export class PdfPublicGeneratorService {
 
           // yes / no check
           if (data.mobility !== 'no') {
-            draw('x', 94, 286);
-            draw(data.mobility_date, 230, 286, 10);
-          } else draw('x', 94, 273);
+            draw('x', 94, 284);
+            draw(data.mobility_date, 230, 284, 10);
+          } else {
+            draw('x', 94, 271);
+          }
 
           // set metadata
-          doc.setTitle("Attestation sur l'honneur de covoiturage");
-          doc.setSubject("Attestation sur l'honneur de covoiturage");
-          doc.setKeywords(['attestation', 'covoiturage']);
+          doc.setTitle('Attestation sur l\'honneur de déplacement en vélo');
+          doc.setSubject('Attestation sur l\'honneur de déplacement en vélo');
+          doc.setKeywords(['attestation', 'vélo']);
           doc.setProducer('beta.gouv');
           doc.setCreator('');
           doc.setAuthor('Ministère de la Transition écologique');
@@ -118,8 +123,8 @@ export class PdfPublicGeneratorService {
       .subscribe(observer);
   }
 
-  private handleError(err): ObservableInput<any> {
-    console.log(err);
+  private _handleError(err): ObservableInput<any> {
+    console.error(err);
     return err;
   }
 }

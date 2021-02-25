@@ -13,10 +13,10 @@
     <label class="rf-label rf-label--required">Je soussigné·e</label>
     <input class="rf-input" formControlName="name" required />
     <p *ngIf="showError('name', 'required')" class="rf-error-text">
-      Le prénom est requis
+      Les prénom et nom sont requis
     </p>
     <p *ngIf="showError('name', 'maxlength')" class="rf-error-text">
-      Le prénom ne peut dépasser 128 caractères
+      Les prénom et nom ne peuvent dépasser 128 caractères
     </p>
   </div>
 
@@ -44,14 +44,14 @@
     </p>
   </div>
 
-  <h4>Covoiturage</h4>
+  <h4>Déplacement en cycle ou cycle à pédalage assisté</h4>
 
   <!-- Distance -->
   <div class="rf-input-group">
     <label class="rf-label">Nombre de kilomètres par trajet</label>
     <input class="rf-input" formControlName="distance" maxlength="6" />
     <p *ngIf="showError('distance', 'max')" class="rf-error-text">
-      La distance ne peut dépasser 100000&nbsp;km
+      La distance ne peut dépasser 1000&nbsp;km
     </p>
     <p *ngIf="showError('distance', 'min')" class="rf-error-text">
       La distance ne peut inférieure à 1&nbsp;km
@@ -63,7 +63,7 @@
 
   <!-- Days -->
   <div class="rf-input-group">
-    <label class="rf-label">Nombre de jours de covoiturage</label>
+    <label class="rf-label">Nombre de jours de déplacement</label>
     <input class="rf-input" formControlName="days" maxlength="3" />
     <p *ngIf="showError('days', 'max')" class="rf-error-text">
       Le nombre de jours ne peut dépasser 365

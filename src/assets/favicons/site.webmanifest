@@ -1,7 +1,7 @@
 {
-  "name": "Générateur d'attestation sur l'honneur de covoiturage",
+  "name": "Générateur d'attestation sur l'honneur de déplacement en vélo",
   "short_name": "Attestation sur l'honneur",
-  "description": "Ce service public numérique génère une attestation sur l'honneur de covoiturage pour le Forfait Mobilités Durables.",
+  "description": "Ce service public numérique génère une attestation sur l'honneur de déplacement en vélo pour le Forfait Mobilités Durables.",
   "categories": ["government", "travel", "health"],
   "lang": "fr-FR",
   "icons": [

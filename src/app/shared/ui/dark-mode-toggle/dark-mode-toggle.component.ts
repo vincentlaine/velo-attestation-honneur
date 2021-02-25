@@ -12,7 +12,8 @@ export class DarkModeToggleComponent implements OnInit {
 
   private scheme: Scheme = 'light';
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
     // fetch the user value from localStorage
@@ -26,15 +27,15 @@ export class DarkModeToggleComponent implements OnInit {
         ? 'dark'
         : 'light';
 
-    this.apply(this.scheme);
-    this.toggle.setValue(this.scheme === 'dark', { emitEvent: false });
+    this._apply(this.scheme);
+    this.toggle.setValue(this.scheme === 'dark', {emitEvent: false});
 
     this.toggle.valueChanges.subscribe((isDark) => {
-      this.apply(isDark ? 'dark' : 'light');
+      this._apply(isDark ? 'dark' : 'light');
     });
   }
 
-  private apply(scheme) {
+  private _apply(scheme): void {
     localStorage.setItem('scheme', scheme);
     document.documentElement.setAttribute('data-theme', scheme);
   }

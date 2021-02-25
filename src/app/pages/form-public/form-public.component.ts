@@ -50,9 +50,9 @@ export class FormPublicComponent implements OnInit {
         Validators.required,
         // validate array length
         (c: AbstractControl): { [key: string]: any } =>
-          c.value.filter((i) => !!i && i !== '').length === 11
+          c.value.filter((i) => !!i && i !== '').length === 10
             ? null
-            : { arrayLength: true },
+            : {arrayLength: true},
       ]
     ),
     location: new FormControl('', [
@@ -66,7 +66,8 @@ export class FormPublicComponent implements OnInit {
     protected companyService: CompanyService,
     private pdf: PdfPublicGeneratorService,
     private counter: CounterService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     // reload saved data in a crash free way
@@ -76,14 +77,18 @@ export class FormPublicComponent implements OnInit {
         const obj = JSON.parse(saved);
         this.profileForm.patchValue(obj);
         obj.chk.forEach((id: string) => {
-          if (!id) return;
+          if (!id) {
+            return;
+          }
           (this.profileForm.get('chk') as FormArray).push(new FormControl(id));
           // @ts-ignore
           document.getElementById(id).checked = true;
         });
       } else {
         document.querySelectorAll('[id*="checkbox_"]').forEach((box) => {
-          if (!box) return;
+          if (!box) {
+            return;
+          }
           // @ts-ignore
           box.checked = true;
           (this.profileForm.get('chk') as FormArray).push(
@@ -117,7 +122,7 @@ export class FormPublicComponent implements OnInit {
     this.setMobilityValidators(this.profileForm.get('mobility').value);
   }
 
-  showError(fieldName: string, errorName: string) {
+  showError(fieldName: string, errorName: string): any {
     return (
       this.profileForm.get(fieldName).dirty &&
       this.profileForm.get(fieldName).hasError(errorName)
@@ -148,14 +153,14 @@ export class FormPublicComponent implements OnInit {
     localStorage.removeItem('formPublic');
   }
 
-  async onSubmit() {
+  async onSubmit(): Promise<any> {
     this.pdf.generate(this.profileForm.value, {
       onComplete: () => alert('Attestation générée'),
     });
-    this.counter.save(window.origin, 'public');
+    // this.counter.save(window.origin, 'public');
   }
 
-  trackByFn(index, item) {
+  trackByFn(index, item): number {
     return item.id;
   }
 
